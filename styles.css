@@ -165,25 +165,29 @@ h1{
 .section{
   max-width:1150px;
   margin:0 auto;
-  padding:64px 22px;
+  padding:52px 22px; /* was 64px (less wasted space) */
 }
+
 .section.alt{
   background: rgba(255,255,255,.02);
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
   max-width:none;
 }
+
 .section.alt .section-head,
 .section.alt .showcase,
 .section.alt .gallery{
   max-width:1150px;
   margin:0 auto;
 }
+
 .section-head h2{
   margin:0;
   font-size:36px;
   letter-spacing:-.5px;
 }
+
 .section-head p{
   margin:10px 0 0;
   color:var(--muted);
@@ -195,42 +199,48 @@ h1{
   gap:14px;
   margin-top:22px;
 }
+
 .card{
-  padding:18px;
-  border-radius:18px;
+  padding:16px;            /* was 18px */
+  border-radius:16px;      /* was 18px */
   border:1px solid var(--line);
   background: rgba(255,255,255,.03);
 }
+
 .card h3{margin:0 0 10px}
 .card p{color:var(--muted); line-height:1.6}
 .card ul{margin:14px 0 0; padding-left:18px; color:rgba(255,255,255,.75)}
 .card li{margin:8px 0}
 
+/* SHOWROOM LAYOUT FIX */
 .showcase{
-  margin-top:24px;
+  margin-top:22px;
   display:grid;
-  grid-template-columns: .9fr 1.1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap:18px;
   align-items:center;
 }
+
 .phone{
-  border-radius:28px;
-  border:1px solid rgba(255,255,255,.14);
-  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-  padding:18px;
+  padding:14px;                /* tighter */
+  border-radius:24px;          /* cleaner */
+  overflow:hidden;             /* IMPORTANT: stops “out of border” */
 }
+
 .phone-screen{
-  height:340px;
-  border-radius:22px;
-  background: radial-gradient(400px 250px at 30% 20%, rgba(46,229,255,.18), transparent 60%),
-              radial-gradient(350px 220px at 70% 70%, rgba(124,60,255,.18), transparent 60%),
-              rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.08);
-  padding:18px;
-  overflow:hidden;
-  position:relative;
+  width:100%;
+  padding:14px;                /* tighter */
+  border-radius:18px;
+  overflow:hidden;             /* IMPORTANT: stops inner overflow */
 }
+
+.show-text{
+  min-width:0;                 /* prevents layout pushing wide */
+}
+
+/* DEMO BLOCK */
 .demo-header{font-weight:900; letter-spacing:.2px}
+
 .revealbox{
   margin-top:14px;
   height:140px;
@@ -239,6 +249,7 @@ h1{
   position:relative;
   overflow:hidden;
 }
+
 .revealbox::after{
   content:"";
   position:absolute; inset:-30px;

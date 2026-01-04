@@ -9,7 +9,8 @@
 </head>
 
 <body>
-  <header class="nav" id="top">
+<body>
+  <header class="nav">
     <a class="brand" href="#top" aria-label="Lumero Digital home">
       <img src="assets/logo.png" alt="Lumero Digital" class="brand-logo" />
     </a>
@@ -25,18 +26,18 @@
     <button class="menu" id="menuBtn" aria-label="Open menu">☰</button>
   </header>
 
-  <main>
+  <main id="top">
+
     <!-- HERO -->
     <section class="hero">
       <div class="hero-inner">
         <p class="pill reveal">Websites • Logos • Small Apps</p>
         <h1 class="reveal delay-1">
-          A clean, modern online presence<br/>
-          that actually looks expensive.
+          Premium websites, logos, and small business tools<br/>
+         A clean, modern online presence
         </h1>
         <p class="sub reveal delay-2">
-          Lumero Digital builds fast websites, strong branding (logos), and simple business tools
-          like quote/invoice-style generators and automation scripts.
+        A clean, modern online presence that actually looks expensive.
         </p>
 
         <div class="cta reveal delay-3">
@@ -75,7 +76,7 @@
     <section id="services" class="section">
       <div class="section-head">
         <h2 class="reveal">What we do</h2>
-        <p class="reveal delay-1">Everything you need to look legit online.</p>
+        <p class="reveal delay-1"></p>
       </div>
 
       <div class="grid3">
@@ -115,7 +116,7 @@
 <section id="showroom" class="section alt">
   <div class="section-head">
     <h2 class="reveal">Showroom</h2>
-    <p class="reveal delay-1">Tap a demo — see the exact vibe you’ll get.</p>
+    <p class="reveal delay-1">Explore a demo to see what your project could look like</p>
   </div>
 
   <div class="showroom">
@@ -158,13 +159,13 @@
           <div class="app-ui">
             <div class="app-head">Quote Builder</div>
             <div class="app-row">
-              <span>Client</span><b>Bankstown Glass</b>
+              <span>Client</span><b>LumeroDigital</b>
             </div>
             <div class="app-row">
-              <span>Window type</span><b>Stacker</b>
+              <span>Service</span><b>Application</b>
             </div>
             <div class="app-row">
-              <span>Qty</span><b>3</b>
+              <span>Qty</span><b>1</b>
             </div>
             <div class="app-total">
               <span>Total</span><b>$1,280</b>
@@ -187,7 +188,7 @@
         <button class="tab active" data-demo="web">Websites</button>
         <button class="tab" data-demo="logo">Logos</button>
         <button class="tab" data-demo="app">Small Apps</button>
-      </div>
+      </div>                                        
 
       <div class="bullets reveal delay-4" id="demoBullets">
         <div class="bullet">✔ Scroll reveal + smooth motion</div>
@@ -203,7 +204,7 @@
     <section id="pricing" class="section">
       <div class="section-head">
         <h2 class="reveal">Pricing</h2>
-        <p class="reveal delay-1">Simple packages. No weird surprises.</p>
+        <p class="reveal delay-1">Clear pricing. No surprises</p>
       </div>
 
       <div class="pricing">
@@ -249,7 +250,7 @@
       </div>
 
       <p class="note reveal delay-3">
-        Hosting/domain can be included as a monthly add-on (depends what you want).
+        Hosting/domain can be included as a monthly add-on
       </p>
     </section>
 
@@ -257,7 +258,7 @@
     <section id="work" class="section alt">
       <div class="section-head">
         <h2 class="reveal">Examples</h2>
-        <p class="reveal delay-1">Put your best 2–4 screenshots here later.</p>
+        <p class="reveal delay-1"></p>
       </div>
 
       <div class="gallery">
@@ -294,31 +295,42 @@
           </p>
         </div>
 
-        <form class="form reveal delay-2" onsubmit="return false;">
-          <label>
-            Name
-            <input type="text" placeholder="Your name" />
-          </label>
-          <label>
-            Email
-            <input type="email" placeholder="your@email.com" />
-          </label>
-          <label>
-            What do you need?
-            <select>
-              <option>Website</option>
-              <option>Logo</option>
-              <option>Website + Logo</option>
-              <option>Small App / Automation</option>
-            </select>
-          </label>
-          <label>
-            Details
-            <textarea placeholder="Tell me about your business + what style you like..."></textarea>
-          </label>
-          <button class="btn full" type="submit">Send enquiry</button>
-          <p class="tiny muted">For now this form doesn’t send — we can wire it to email later.</p>
-        </form>
+        <form class="form reveal delay-2"
+      action="https://formspree.io/f/xkogprok"
+      method="POST">
+
+  <label>
+    Name
+    <input type="text" name="name" placeholder="Your name" required />
+  </label>
+
+  <label>
+    Email
+    <input type="email" name="email" placeholder="your@email.com" required />
+  </label>
+
+  <label>
+    What do you need?
+    <select name="service">
+      <option>Website</option>
+      <option>Logo</option>
+      <option>Website + Logo</option>
+      <option>Small App / Automation</option>
+    </select>
+  </label>
+
+  <label>
+    Details
+    <textarea name="details" placeholder="Tell me about your business + what style you like..." required></textarea>
+  </label>
+
+  <!-- Optional: helps stop spam -->
+  <input type="text" name="_gotcha" style="display:none" />
+
+  <button class="btn full" type="submit">Send enquiry</button>
+  <p class="tiny muted">We’ll reply within 24 hours.</p>
+</form>
+
       </div>
     </section>
 
