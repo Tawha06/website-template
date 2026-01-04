@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumero Digital</title>
+  <meta name="description" content="Lumero Digital builds modern websites, logos, and small business apps." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="nav" id="top">
+    <a class="brand" href="#top" aria-label="Lumero Digital home">
+      <img src="assets/logo.png" alt="Lumero Digital" class="brand-logo" />
+    </a>
+
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#showroom">Showroom</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#work">Work</a>
+      <a href="#contact" class="btn small">Get a quote</a>
+    </nav>
+
+    <button class="menu" id="menuBtn" aria-label="Open menu">☰</button>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="pill reveal">Websites • Logos • Small Apps</p>
+        <h1 class="reveal delay-1">
+          A clean, modern online presence<br/>
+          that actually looks expensive.
+        </h1>
+        <p class="sub reveal delay-2">
+          Lumero Digital builds fast websites, strong branding (logos), and simple business tools
+          like quote/invoice-style generators and automation scripts.
+        </p>
+
+        <div class="cta reveal delay-3">
+          <a class="btn" href="#pricing">See pricing</a>
+          <a class="btn ghost" href="#showroom">View showroom</a>
+        </div>
+
+        <div class="stats reveal delay-4">
+          <div class="stat"><span>Fast</span><small>Optimised & responsive</small></div>
+          <div class="stat"><span>Modern</span><small>Apple-style motion</small></div>
+          <div class="stat"><span>Branding</span><small>Logos + identity</small></div>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="glow"></div>
+        <div class="card3d reveal delay-2">
+          <div class="card-top">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="tag">Lumero Digital</span>
+          </div>
+          <div class="card-body">
+            <p class="code-line">const site = <b>"clean"</b>;</p>
+            <p class="code-line">const brand = <b>"strong"</b>;</p>
+            <p class="code-line">const vibe = <b>"premium"</b>;</p>
+            <div class="progress">
+              <div class="bar"></div>
+            </div>
+            <p class="tiny">web • logos • small apps • hosting</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <div class="section-head">
+        <h2 class="reveal">What we do</h2>
+        <p class="reveal delay-1">Everything you need to look legit online.</p>
+      </div>
+
+      <div class="grid3">
+        <article class="card reveal">
+          <h3>Websites</h3>
+          <p>Modern landing pages + multi-page sites. Fast load, mobile-first, SEO basics.</p>
+          <ul>
+            <li>HTML/CSS/JS (clean code)</li>
+            <li>Optional backend (NestJS)</li>
+            <li>Hosting + domain setup</li>
+          </ul>
+        </article>
+
+        <article class="card reveal delay-1">
+          <h3>Logos + Branding</h3>
+          <p>Logo design that looks premium on Google, Instagram, and your website.</p>
+          <ul>
+            <li>Icon + wordmark</li>
+            <li>Colour palette + style</li>
+            <li>Profile-ready versions</li>
+          </ul>
+        </article>
+
+        <article class="card reveal delay-2">
+          <h3>Small Apps</h3>
+          <p>Simple tools that save time, like quote generators or document auto-fill systems.</p>
+          <ul>
+            <li>Template placeholder filling</li>
+            <li>Basic dashboards</li>
+            <li>Automation scripts</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- SHOWROOM -->
+<section id="showroom" class="section alt">
+  <div class="section-head">
+    <h2 class="reveal">Showroom</h2>
+    <p class="reveal delay-1">Tap a demo — see the exact vibe you’ll get.</p>
+  </div>
+
+  <div class="showroom">
+    <!-- LEFT: “device” preview -->
+    <div class="device reveal">
+      <div class="device-top">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="device-title" id="demoTitle">Website Demo</span>
+      </div>
+
+      <div class="device-screen" id="deviceScreen">
+        <!-- Websites demo -->
+        <div class="demo demo-web active">
+          <div class="demo-hero">
+            <div class="demo-pill">Landing • Responsive • Fast</div>
+            <div class="demo-h1">Clean sections<br/>that reveal smoothly</div>
+            <div class="demo-sub">Scroll-style motion, premium spacing, gradients that match your brand.</div>
+          </div>
+
+          <div class="demo-cards">
+            <div class="demo-card">Services</div>
+            <div class="demo-card">Pricing</div>
+            <div class="demo-card">Contact</div>
+          </div>
+
+          <div class="demo-sweep"></div>
+        </div>
+
+        <!-- Logos demo -->
+        <div class="demo demo-logo">
+          <div class="logo-wrap">
+            <div class="logo-glow"></div>
+            <img src="assets/logo.png" alt="Lumero Digital logo" class="logo-big" />
+            <div class="logo-caption">Logo reveal + glow pulse</div>
+          </div>
+        </div>
+
+        <!-- Apps demo -->
+        <div class="demo demo-app">
+          <div class="app-ui">
+            <div class="app-head">Quote Builder</div>
+            <div class="app-row">
+              <span>Client</span><b>Bankstown Glass</b>
+            </div>
+            <div class="app-row">
+              <span>Window type</span><b>Stacker</b>
+            </div>
+            <div class="app-row">
+              <span>Qty</span><b>3</b>
+            </div>
+            <div class="app-total">
+              <span>Total</span><b>$1,280</b>
+            </div>
+            <button class="app-btn">Generate PDF / Word</button>
+            <p class="app-note">Automates templates & saves time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: text + tabs -->
+    <div class="show-info">
+      <h3 class="reveal delay-1" id="demoHeading">Transitions that feel expensive</h3>
+      <p class="reveal delay-2" id="demoDesc">
+        Smooth reveals, subtle tilt, and clean spacing — like premium tech sites. This is the look clients remember.
+      </p>
+
+      <div class="demo-tabs reveal delay-3">
+        <button class="tab active" data-demo="web">Websites</button>
+        <button class="tab" data-demo="logo">Logos</button>
+        <button class="tab" data-demo="app">Small Apps</button>
+      </div>
+
+      <div class="bullets reveal delay-4" id="demoBullets">
+        <div class="bullet">✔ Scroll reveal + smooth motion</div>
+        <div class="bullet">✔ Premium gradients (matches your logo)</div>
+        <div class="bullet">✔ Clean layout for pricing & services</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+      <div class="section-head">
+        <h2 class="reveal">Pricing</h2>
+        <p class="reveal delay-1">Simple packages. No weird surprises.</p>
+      </div>
+
+      <div class="pricing">
+        <article class="price-card reveal">
+          <h3>Starter</h3>
+          <p class="price">$299</p>
+          <p class="desc">Clean one-page site for local businesses.</p>
+          <ul>
+            <li>1 page (landing)</li>
+            <li>Mobile responsive</li>
+            <li>Contact section</li>
+            <li>Basic SEO</li>
+          </ul>
+          <a class="btn full" href="#contact">Pick Starter</a>
+        </article>
+
+        <article class="price-card featured reveal delay-1">
+          <div class="badge">Most popular</div>
+          <h3>Business</h3>
+          <p class="price">$699</p>
+          <p class="desc">Multi-section site + stronger motion + polish.</p>
+          <ul>
+            <li>Up to 5 sections</li>
+            <li>Showcase animations</li>
+            <li>Gallery / services</li>
+            <li>Google-ready assets</li>
+          </ul>
+          <a class="btn full" href="#contact">Pick Business</a>
+        </article>
+
+        <article class="price-card reveal delay-2">
+          <h3>Pro</h3>
+          <p class="price">$1,499+</p>
+          <p class="desc">Custom build + optional small app features.</p>
+          <ul>
+            <li>Multi-page site</li>
+            <li>Optional NestJS backend</li>
+            <li>Booking / forms</li>
+            <li>Automation tools</li>
+          </ul>
+          <a class="btn full" href="#contact">Pick Pro</a>
+        </article>
+      </div>
+
+      <p class="note reveal delay-3">
+        Hosting/domain can be included as a monthly add-on (depends what you want).
+      </p>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" class="section alt">
+      <div class="section-head">
+        <h2 class="reveal">Examples</h2>
+        <p class="reveal delay-1">Put your best 2–4 screenshots here later.</p>
+      </div>
+
+      <div class="gallery">
+        <a class="shot reveal" href="#" aria-label="Example project 1">
+          <div class="shot-inner">
+            <div class="shot-title">Modern Landing Page</div>
+            <div class="shot-sub">Clean + fast</div>
+          </div>
+        </a>
+
+        <a class="shot reveal delay-1" href="#" aria-label="Example project 2">
+          <div class="shot-inner">
+            <div class="shot-title">Logo + Branding</div>
+            <div class="shot-sub">Icon + wordmark</div>
+          </div>
+        </a>
+
+        <a class="shot reveal delay-2" href="#" aria-label="Example project 3">
+          <div class="shot-inner">
+            <div class="shot-title">Small Business Tool</div>
+            <div class="shot-sub">Template auto-fill</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="contact">
+        <div>
+          <h2 class="reveal">Let’s build yours.</h2>
+          <p class="reveal delay-1">
+            Message what business you run and what you need (website / logo / small app).
+          </p>
+        </div>
+
+        <form class="form reveal delay-2" onsubmit="return false;">
+          <label>
+            Name
+            <input type="text" placeholder="Your name" />
+          </label>
+          <label>
+            Email
+            <input type="email" placeholder="your@email.com" />
+          </label>
+          <label>
+            What do you need?
+            <select>
+              <option>Website</option>
+              <option>Logo</option>
+              <option>Website + Logo</option>
+              <option>Small App / Automation</option>
+            </select>
+          </label>
+          <label>
+            Details
+            <textarea placeholder="Tell me about your business + what style you like..."></textarea>
+          </label>
+          <button class="btn full" type="submit">Send enquiry</button>
+          <p class="tiny muted">For now this form doesn’t send — we can wire it to email later.</p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Lumero Digital.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
