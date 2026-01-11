@@ -100,6 +100,11 @@ Ask before continuing
 ✔ You pull
 ✔ GitHub updates
 ✔ Website goes live
-yur
-git config --global user.name "issamelmohtadi-spec"
-git config --global user.email "issamelmohtadi@gmail.com"
+
+IF YOU WANT TO DO CHANGE DO THIS
+git add . (This does the change but first do Control s on the file then write this)
+git commit -m "message" (So this saves the change and you write message like i did 123)
+git push (This actually send it online so you have to do it in this order)
+
+THEN I DO
+git pull (THIS UPDATES MY VS CODE)
