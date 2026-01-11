@@ -108,3 +108,5 @@ git push (This actually send it online so you have to do it in this order)
 
 THEN I DO
 git pull (THIS UPDATES MY VS CODE)
+
+yurdickehaed
