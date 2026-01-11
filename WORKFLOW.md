@@ -100,3 +100,6 @@ Ask before continuing
 ✔ You pull
 ✔ GitHub updates
 ✔ Website goes live
+yur
+git config --global user.name "issamelmohtadi-spec"
+git config --global user.email "issamelmohtadi@gmail.com"
