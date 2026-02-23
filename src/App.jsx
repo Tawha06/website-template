@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from 'react'
+﻿import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import logo from '../assets/logo.png'
 import workWebsite from '../assets/work-website.mp4'
@@ -40,32 +40,81 @@ const demoCopy = {
   },
 }
 
+const legalCopy = {
+  privacy: {
+    title: 'Privacy Policy (Summary)',
+    body: [
+      'We collect details you submit in the enquiry form, and may use basic analytics to improve performance.',
+      'Your information is used to respond to enquiries, prepare quotes, and deliver requested services.',
+      'We do not sell your data. Form submissions may be processed by Formspree as the contact provider.',
+      `Last updated: ${year}`,
+    ],
+  },
+  terms: {
+    title: 'Terms of Service (Summary)',
+    body: [
+      'All projects are delivered to the agreed scope, timeline, and payment terms confirmed in writing.',
+      'Clients provide accurate content, approvals, and feedback in time to avoid delays.',
+      'Nothing on this site is legal advice. Service rights are provided in line with Australian Consumer Law.',
+      `Last updated: ${year}`,
+    ],
+  },
+  refund: {
+    title: 'Refund Policy (Summary)',
+    body: [
+      'Deposits are generally non-refundable after project work begins because time is allocated to your build.',
+      'If agreed scope is not delivered, we first remedy the issue. Where required, remedies follow Australian Consumer Law.',
+      'Your statutory guarantees under Australian Consumer Law and NSW Fair Trading guidance are not excluded.',
+      `Last updated: ${year}`,
+    ],
+  },
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeDemo, setActiveDemo] = useState('web')
+  const [legalKey, setLegalKey] = useState('')
 
   const copy = useMemo(() => demoCopy[activeDemo], [activeDemo])
+  const legal = legalKey ? legalCopy[legalKey] : null
+
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll('.reveal'))
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('in')
+        })
+      },
+      { threshold: 0.14 }
+    )
+
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
 
   const closeMenu = () => setMenuOpen(false)
 
   return (
     <>
       <header className="nav">
-        <a className="brand" href="#top" aria-label="Lumero Digital home" onClick={closeMenu}>
-          <img src={logo} alt="Lumero Digital" className="brand-logo" />
-        </a>
+        <div className="nav-inner">
+          <a className="brand" href="#top" aria-label="Lumero Digital home" onClick={closeMenu}>
+            <img src={logo} alt="Lumero Digital" className="brand-logo" />
+          </a>
 
-        <nav className="links" aria-label="Primary">
-          <a href="#services">Services</a>
-          <a href="#showroom">Showroom</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#work">Work</a>
-          <a href="#contact" className="btn small">Get a quote</a>
-        </nav>
+          <nav className="links" aria-label="Primary">
+            <a href="#services">Services</a>
+            <a href="#showroom">Showroom</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#work">Work</a>
+            <a href="#contact" className="btn small">Get a quote</a>
+          </nav>
 
-        <button className="menu" type="button" onClick={() => setMenuOpen(true)} aria-label="Open menu">
-          Menu
-        </button>
+          <button className="menu" type="button" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+            Menu
+          </button>
+        </div>
       </header>
 
       <div className={`drawer ${menuOpen ? 'open' : ''}`} aria-hidden={!menuOpen}>
@@ -88,19 +137,19 @@ function App() {
       </div>
 
       <main id="top">
-        <section className="hero">
+        <section className="hero reveal">
           <div className="hero-inner">
-            <p className="pill">Custom websites - branding - small web apps</p>
+            <p className="pill">Websites · Branding · Simple Apps for Sydney businesses</p>
 
             <h1>
-              Websites that look premium.<br />
-              Branding that builds trust.<br />
-              Tools that save time.
+              Clear websites.<br />
+              Credible branding.<br />
+              Practical tools.
             </h1>
 
             <p className="sub">
-              Lumero Digital helps Sydney small businesses improve credibility and conversions with clean websites,
-              professional branding, and practical mini-apps.
+              Lumero Digital helps small businesses explain what they do fast, build trust instantly, and convert
+              more visitors into enquiries.
             </p>
 
             <div className="cta">
@@ -109,8 +158,8 @@ function App() {
             </div>
 
             <div className="hero-badges">
-              <div className="badge-pill"><b>Fast builds</b><small>Optimised and responsive</small></div>
-              <div className="badge-pill"><b>Clean motion</b><small>Modern interaction design</small></div>
+              <div className="badge-pill"><b>Fast delivery</b><small>Optimised and responsive</small></div>
+              <div className="badge-pill"><b>Simple UX</b><small>Easy to scan and navigate</small></div>
               <div className="badge-pill"><b>Lead focused</b><small>Built to drive enquiries</small></div>
             </div>
           </div>
@@ -138,14 +187,14 @@ function App() {
           </div>
         </section>
 
-        <section id="services" className="section">
+        <section id="services" className="section reveal">
           <div className="section-head">
             <h2>What we build</h2>
             <p>Three focused services, delivered properly for small business growth.</p>
           </div>
 
           <div className="grid3">
-            <article className="card">
+            <article className="card reveal delay-1">
               <div className="card-topline">
                 <span className="chip">Websites</span>
                 <span className="chip subtle">Custom coded</span>
@@ -159,7 +208,7 @@ function App() {
               </ul>
             </article>
 
-            <article className="card">
+            <article className="card reveal delay-2">
               <div className="card-topline">
                 <span className="chip">Branding</span>
                 <span className="chip subtle">Logo systems</span>
@@ -173,7 +222,7 @@ function App() {
               </ul>
             </article>
 
-            <article className="card">
+            <article className="card reveal delay-3">
               <div className="card-topline">
                 <span className="chip">Small Apps</span>
                 <span className="chip subtle">Automation</span>
@@ -189,14 +238,14 @@ function App() {
           </div>
         </section>
 
-        <section id="showroom" className="section alt">
+        <section id="showroom" className="section alt reveal">
           <div className="section-head">
             <h2>Showroom</h2>
             <p>Preview the exact visual quality and interaction style used in client builds.</p>
           </div>
 
           <div className="showroom">
-            <div className="device">
+            <div className="device reveal delay-1">
               <div className="device-top">
                 <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
                 <span className="device-title">{copy.title}</span>
@@ -252,7 +301,7 @@ function App() {
               </div>
             </div>
 
-            <div className="show-info">
+            <div className="show-info reveal delay-2">
               <h3>{copy.heading}</h3>
               <p>{copy.description}</p>
 
@@ -276,14 +325,14 @@ function App() {
           </div>
         </section>
 
-        <section id="pricing" className="section">
+        <section id="pricing" className="section reveal">
           <div className="section-head">
             <h2>Pricing</h2>
             <p>Competitive Sydney pricing for a solo specialist delivering premium quality.</p>
           </div>
 
           <div className="pricing">
-            <article className="price-card">
+            <article className="price-card reveal delay-1">
               <div className="price-head">
                 <h3>Starter</h3>
                 <span className="price-chip">Most popular start</span>
@@ -298,7 +347,7 @@ function App() {
               <a className="btn full" href="#contact">Quote Starter</a>
             </article>
 
-            <article className="price-card featured">
+            <article className="price-card featured reveal delay-2">
               <div className="price-head">
                 <h3>Business</h3>
                 <span className="price-chip glow">Growth package</span>
@@ -313,7 +362,7 @@ function App() {
               <a className="btn full" href="#contact">Quote Business</a>
             </article>
 
-            <article className="price-card">
+            <article className="price-card reveal delay-3">
               <div className="price-head">
                 <h3>Pro</h3>
                 <span className="price-chip">Custom scope</span>
@@ -329,7 +378,7 @@ function App() {
             </article>
           </div>
 
-          <div className="note">
+          <div className="note reveal delay-3">
             <div className="note-box">
               <b>Add-ons:</b>
               <span className="muted">Branding pack AUD $600-$1,500 · Extra pages AUD $250-$500 · Monthly care AUD $120-$450</span>
@@ -337,14 +386,14 @@ function App() {
           </div>
         </section>
 
-        <section id="work" className="section alt">
+        <section id="work" className="section alt reveal">
           <div className="section-head">
             <h2>Example work</h2>
             <p>These are your original video showcases restored in the React build.</p>
           </div>
 
           <div className="gallery">
-            <figure className="shot">
+            <figure className="shot reveal delay-1">
               <video className="media" src={workWebsite} autoPlay muted loop playsInline />
               <figcaption>
                 <b>Modern Website</b>
@@ -352,7 +401,7 @@ function App() {
               </figcaption>
             </figure>
 
-            <figure className="shot">
+            <figure className="shot reveal delay-2">
               <video className="media" src={workLogo} autoPlay muted loop playsInline />
               <figcaption>
                 <b>Logo and Branding</b>
@@ -360,7 +409,7 @@ function App() {
               </figcaption>
             </figure>
 
-            <figure className="shot">
+            <figure className="shot reveal delay-3">
               <video className="media" src={workApp} autoPlay muted loop playsInline />
               <figcaption>
                 <b>Small App Tool</b>
@@ -370,9 +419,9 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="section">
+        <section id="contact" className="section reveal">
           <div className="contact">
-            <div>
+            <div className="reveal delay-1">
               <h2>Get a quote</h2>
               <p>
                 Tell me about your business and goals. I will reply with a clear scope, timeline, and recommended package.
@@ -385,7 +434,7 @@ function App() {
               </div>
             </div>
 
-            <form className="form" action="https://formspree.io/f/xkogprok" method="POST">
+            <form className="form reveal delay-2" action="https://formspree.io/f/xkogprok" method="POST">
               <input type="hidden" name="_subject" value="New enquiry - Lumero Digital" />
               <input type="text" name="_gotcha" style={{ display: 'none' }} />
 
@@ -420,13 +469,39 @@ function App() {
           </div>
         </section>
 
-        <footer className="footer">
+        <footer className="footer reveal">
           <div className="footer-inner">
             <p>© {year} Lumero Digital</p>
-            <p className="tiny muted">Sydney, Australia</p>
+            <div className="footer-links">
+              <button className="legal-link" type="button" onClick={() => setLegalKey('privacy')}>Privacy</button>
+              <button className="legal-link" type="button" onClick={() => setLegalKey('terms')}>Terms</button>
+              <button className="legal-link" type="button" onClick={() => setLegalKey('refund')}>Refunds</button>
+            </div>
+            <p className="tiny muted">Australian sole trader · Rights provided under Australian Consumer Law and NSW Fair Trading guidance.</p>
           </div>
         </footer>
       </main>
+
+      {legal && (
+        <dialog className="legal" open onClick={(e) => { if (e.target === e.currentTarget) setLegalKey('') }}>
+          <div className="legal-card">
+            <div className="legal-top">
+              <div className="legal-title">{legal.title}</div>
+              <button className="legal-close" type="button" onClick={() => setLegalKey('')} aria-label="Close">X</button>
+            </div>
+
+            <div className="legal-body">
+              {legal.body.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
+
+            <div className="legal-actions">
+              <button className="btn ghost" type="button" onClick={() => setLegalKey('')}>Close</button>
+            </div>
+          </div>
+        </dialog>
+      )}
     </>
   )
 }
