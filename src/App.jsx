@@ -93,6 +93,13 @@ function App() {
     return () => io.disconnect()
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = legalKey ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [legalKey])
+
   const closeMenu = () => setMenuOpen(false)
 
   return (
