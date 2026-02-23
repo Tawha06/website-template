@@ -1,261 +1,432 @@
-﻿import { useState } from 'react'
+﻿import { useMemo, useState } from 'react'
 import './App.css'
 import logo from '../assets/logo.png'
+import workWebsite from '../assets/work-website.mp4'
+import workLogo from '../assets/work-logo.mp4'
+import workApp from '../assets/work-app.mp4'
 
 const year = new Date().getFullYear()
 
+const demoCopy = {
+  web: {
+    title: 'Website Demo',
+    heading: 'Websites that feel premium',
+    description: 'Smooth motion, clear spacing, and conversion-first layout inspired by modern product brands.',
+    bullets: [
+      'Smooth scroll reveal and transitions',
+      'Brand-matched visual direction',
+      'Clear structure built for enquiries',
+    ],
+  },
+  logo: {
+    title: 'Logo Demo',
+    heading: 'Branding that looks credible everywhere',
+    description: 'Simple logo systems that look sharp on socials, uniforms, invoices, and signage.',
+    bullets: [
+      'Icon and wordmark versions',
+      'Social and profile-ready exports',
+      'Consistent visual identity system',
+    ],
+  },
+  app: {
+    title: 'App Demo',
+    heading: 'Simple tools that save time',
+    description: 'Small web apps like calculators, booking flows, and internal dashboards tailored to your workflow.',
+    bullets: [
+      'Quote and estimate automation',
+      'Simple dashboards and forms',
+      'Built around your real process',
+    ],
+  },
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeDemo, setActiveDemo] = useState('web')
+
+  const copy = useMemo(() => demoCopy[activeDemo], [activeDemo])
 
   const closeMenu = () => setMenuOpen(false)
 
   return (
     <>
-      <header className="site-header">
-        <div className="container nav-wrap">
-          <a className="brand" href="#top" aria-label="Lumero Digital home" onClick={closeMenu}>
-            <img src={logo} alt="Lumero Digital logo" className="brand-logo" />
-            <span>Lumero Digital</span>
-          </a>
+      <header className="nav">
+        <a className="brand" href="#top" aria-label="Lumero Digital home" onClick={closeMenu}>
+          <img src={logo} alt="Lumero Digital" className="brand-logo" />
+        </a>
 
-          <button
-            className="menu-toggle"
-            type="button"
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            Menu
-          </button>
+        <nav className="links" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#showroom">Showroom</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#work">Work</a>
+          <a href="#contact" className="btn small">Get a quote</a>
+        </nav>
 
-          <nav className={`main-nav ${menuOpen ? 'open' : ''}`} aria-label="Main navigation">
-            <a href="#services" onClick={closeMenu}>Services</a>
-            <a href="#packages" onClick={closeMenu}>Packages</a>
-            <a href="#process" onClick={closeMenu}>Process</a>
-            <a href="#contact" className="btn btn-small" onClick={closeMenu}>Get a Quote</a>
-          </nav>
-        </div>
+        <button className="menu" type="button" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+          Menu
+        </button>
       </header>
 
-      <main id="top">
-        <section className="section hero">
-          <div className="container hero-grid">
-            <div>
-              <p className="eyebrow">Sydney-Based Digital Partner</p>
-              <h1>Websites and small business tools that bring in better leads.</h1>
-              <p className="lead">
-                Lumero Digital helps small businesses look credible online with clean websites, practical branding,
-                and simple web apps that remove manual admin work.
-              </p>
+      <div className={`drawer ${menuOpen ? 'open' : ''}`} aria-hidden={!menuOpen}>
+        <div className="drawer-inner">
+          <div className="drawer-top">
+            <div className="drawer-title">Menu</div>
+            <button className="drawer-close" type="button" onClick={closeMenu} aria-label="Close menu">
+              X
+            </button>
+          </div>
+          <a className="drawer-link" href="#services" onClick={closeMenu}>Services</a>
+          <a className="drawer-link" href="#showroom" onClick={closeMenu}>Showroom</a>
+          <a className="drawer-link" href="#pricing" onClick={closeMenu}>Pricing</a>
+          <a className="drawer-link" href="#work" onClick={closeMenu}>Work</a>
+          <div className="drawer-cta">
+            <a className="btn full" href="#contact" onClick={closeMenu}>Get a quote</a>
+            <p className="tiny muted drawer-note">Quick reply - clear scope - Sydney based</p>
+          </div>
+        </div>
+      </div>
 
-              <div className="hero-cta">
-                <a href="#contact" className="btn">Book a Free Discovery Call</a>
-                <a href="#packages" className="btn btn-ghost">See Packages</a>
+      <main id="top">
+        <section className="hero">
+          <div className="hero-inner">
+            <p className="pill">Custom websites - branding - small web apps</p>
+
+            <h1>
+              Websites that look premium.<br />
+              Branding that builds trust.<br />
+              Tools that save time.
+            </h1>
+
+            <p className="sub">
+              Lumero Digital helps Sydney small businesses improve credibility and conversions with clean websites,
+              professional branding, and practical mini-apps.
+            </p>
+
+            <div className="cta">
+              <a className="btn" href="#pricing">See pricing</a>
+              <a className="btn ghost" href="#showroom">See demos</a>
+            </div>
+
+            <div className="hero-badges">
+              <div className="badge-pill"><b>Fast builds</b><small>Optimised and responsive</small></div>
+              <div className="badge-pill"><b>Clean motion</b><small>Modern interaction design</small></div>
+              <div className="badge-pill"><b>Lead focused</b><small>Built to drive enquiries</small></div>
+            </div>
+          </div>
+
+          <div className="hero-art">
+            <div className="glow" />
+            <div className="card3d" aria-label="Lumero demo card">
+              <div className="card-top">
+                <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
+                <span className="tag">Lumero Digital</span>
+              </div>
+              <div className="card-body">
+                <p className="code-line">const website = <b>'custom'</b>;</p>
+                <p className="code-line">const branding = <b>'credible'</b>;</p>
+                <p className="code-line">const tools = <b>'practical'</b>;</p>
+                <div className="progress"><div className="bar" /></div>
+                <div className="mini-metrics">
+                  <div><b>+ Speed</b><small>Fast load</small></div>
+                  <div><b>+ Trust</b><small>Clear structure</small></div>
+                  <div><b>+ Leads</b><small>Strong CTA</small></div>
+                </div>
+                <p className="tiny">website - logo - small apps - support</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="services" className="section">
+          <div className="section-head">
+            <h2>What we build</h2>
+            <p>Three focused services, delivered properly for small business growth.</p>
+          </div>
+
+          <div className="grid3">
+            <article className="card">
+              <div className="card-topline">
+                <span className="chip">Websites</span>
+                <span className="chip subtle">Custom coded</span>
+              </div>
+              <h3>Business websites</h3>
+              <p>Landing pages and multi-page sites designed to convert.</p>
+              <ul>
+                <li>Mobile-first layout</li>
+                <li>Clear CTA and trust sections</li>
+                <li>SEO-ready page structure</li>
+              </ul>
+            </article>
+
+            <article className="card">
+              <div className="card-topline">
+                <span className="chip">Branding</span>
+                <span className="chip subtle">Logo systems</span>
+              </div>
+              <h3>Logo and identity</h3>
+              <p>Simple branding that looks professional across every touchpoint.</p>
+              <ul>
+                <li>Primary and alternate logos</li>
+                <li>Color and font guidance</li>
+                <li>Social-ready exports</li>
+              </ul>
+            </article>
+
+            <article className="card">
+              <div className="card-topline">
+                <span className="chip">Small Apps</span>
+                <span className="chip subtle">Automation</span>
+              </div>
+              <h3>Business mini tools</h3>
+              <p>Quote calculators, booking flows, and lightweight dashboards.</p>
+              <ul>
+                <li>Custom forms and workflows</li>
+                <li>Simple dashboard interfaces</li>
+                <li>Admin time-saving tools</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="showroom" className="section alt">
+          <div className="section-head">
+            <h2>Showroom</h2>
+            <p>Preview the exact visual quality and interaction style used in client builds.</p>
+          </div>
+
+          <div className="showroom">
+            <div className="device">
+              <div className="device-top">
+                <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
+                <span className="device-title">{copy.title}</span>
               </div>
 
-              <ul className="hero-trust" aria-label="Trust points">
-                <li>Clear scope and fixed deliverables</li>
-                <li>Built for mobile and conversion</li>
-                <li>Fast communication and turnaround</li>
-              </ul>
+              <div className="device-screen">
+                <div className="device-frame" />
+
+                <div className={`demo demo-web ${activeDemo === 'web' ? 'active' : ''}`}>
+                  <div className="demo-hero">
+                    <div className="demo-pill">Landing - Responsive - Fast</div>
+                    <div className="demo-h1">Clean sections<br />with smooth reveals</div>
+                    <div className="demo-sub">Premium spacing, strong hierarchy, and a clear call-to-action path.</div>
+                  </div>
+                  <div className="demo-cards">
+                    <div className="demo-card">Services</div>
+                    <div className="demo-card">Pricing</div>
+                    <div className="demo-card">Contact</div>
+                  </div>
+                  <div className="demo-footerline">
+                    <span className="tiny muted">Scroll reveal and soft shadows</span>
+                    <span className="tiny muted">Built custom</span>
+                  </div>
+                  <div className="demo-sweep" />
+                </div>
+
+                <div className={`demo demo-logo ${activeDemo === 'logo' ? 'active' : ''}`}>
+                  <div className="logo-wrap">
+                    <div className="logo-glow" />
+                    <img src={logo} alt="Logo demo" className="logo-big" />
+                    <div className="logo-caption">Logo reveal + clean spacing</div>
+                    <div className="logo-chips">
+                      <span className="mini-chip">Icon</span>
+                      <span className="mini-chip">Wordmark</span>
+                      <span className="mini-chip">Social ready</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={`demo demo-app ${activeDemo === 'app' ? 'active' : ''}`}>
+                  <div className="app-ui">
+                    <div className="app-head">Quote Generator</div>
+                    <div className="app-grid">
+                      <div className="app-row"><span>Client</span><b>Northside Glass</b></div>
+                      <div className="app-row"><span>Type</span><b>Frameless</b></div>
+                      <div className="app-row"><span>Qty</span><b>3</b></div>
+                    </div>
+                    <div className="app-total"><span>Total</span><b>$2,480</b></div>
+                    <button className="app-btn" type="button">Generate PDF / Doc</button>
+                    <p className="app-note">Auto-fills templates and saves admin time.</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <aside className="hero-panel" aria-label="Who this is for">
-              <h2>Best Fit Clients</h2>
+            <div className="show-info">
+              <h3>{copy.heading}</h3>
+              <p>{copy.description}</p>
+
+              <div className="demo-tabs" role="tablist" aria-label="Showroom demos">
+                <button className={`tab ${activeDemo === 'web' ? 'active' : ''}`} onClick={() => setActiveDemo('web')} type="button">Websites</button>
+                <button className={`tab ${activeDemo === 'logo' ? 'active' : ''}`} onClick={() => setActiveDemo('logo')} type="button">Logos</button>
+                <button className={`tab ${activeDemo === 'app' ? 'active' : ''}`} onClick={() => setActiveDemo('app')} type="button">Small Apps</button>
+              </div>
+
+              <div className="bullets">
+                {copy.bullets.map((item) => (
+                  <div className="bullet" key={item}>✓ {item}</div>
+                ))}
+              </div>
+
+              <div className="show-cta">
+                <a className="btn full" href="#contact">Get a quote</a>
+                <p className="tiny muted">Share what you need and receive a clear scope with pricing options.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="pricing" className="section">
+          <div className="section-head">
+            <h2>Pricing</h2>
+            <p>Competitive Sydney pricing for a solo specialist delivering premium quality.</p>
+          </div>
+
+          <div className="pricing">
+            <article className="price-card">
+              <div className="price-head">
+                <h3>Starter</h3>
+                <span className="price-chip">Most popular start</span>
+              </div>
+              <p className="price">AUD $1,500 - $2,500</p>
+              <p className="desc">1-3 page website for new or early-stage businesses.</p>
               <ul>
-                <li>Trades, clinics, and local services</li>
-                <li>Consultants and solo operators</li>
-                <li>Growing teams needing cleaner systems</li>
+                <li>Mobile responsive build</li>
+                <li>Contact form integration</li>
+                <li>Basic SEO structure</li>
               </ul>
-              <p>
-                If your business relies on enquiries, reputation, and trust, this is built for you.
-              </p>
-            </aside>
+              <a className="btn full" href="#contact">Quote Starter</a>
+            </article>
+
+            <article className="price-card featured">
+              <div className="price-head">
+                <h3>Business</h3>
+                <span className="price-chip glow">Growth package</span>
+              </div>
+              <p className="price">AUD $3,000 - $5,500</p>
+              <p className="desc">5-8 pages with stronger lead flow and tracking setup.</p>
+              <ul>
+                <li>Conversion-focused page structure</li>
+                <li>Service and trust pages</li>
+                <li>Analytics and event tracking</li>
+              </ul>
+              <a className="btn full" href="#contact">Quote Business</a>
+            </article>
+
+            <article className="price-card">
+              <div className="price-head">
+                <h3>Pro</h3>
+                <span className="price-chip">Custom scope</span>
+              </div>
+              <p className="price">AUD $6,000 - $10,000+</p>
+              <p className="desc">Website plus one custom app feature for operational efficiency.</p>
+              <ul>
+                <li>Advanced page and feature set</li>
+                <li>Small app workflow integration</li>
+                <li>Priority support post-launch</li>
+              </ul>
+              <a className="btn full" href="#contact">Quote Pro</a>
+            </article>
           </div>
-        </section>
 
-        <section className="section" id="services">
-          <div className="container">
-            <div className="section-head">
-              <p className="eyebrow">Services</p>
-              <h2>Focused offers that solve real business problems</h2>
-              <p>No fluff. Every deliverable is tied to trust, clarity, and lead generation.</p>
-            </div>
-
-            <div className="cards three-col">
-              <article className="card">
-                <h3>Website Design + Development</h3>
-                <p>Modern business sites that explain your offer fast and convert visitors into enquiries.</p>
-                <ul>
-                  <li>Landing pages or multi-page sites</li>
-                  <li>Mobile-first responsive layouts</li>
-                  <li>Conversion-focused structure</li>
-                </ul>
-              </article>
-
-              <article className="card">
-                <h3>Logo + Basic Branding</h3>
-                <p>Simple and professional identity kits so your business looks consistent everywhere.</p>
-                <ul>
-                  <li>Primary logo + alternate mark</li>
-                  <li>Brand colours and font pairing</li>
-                  <li>Social-ready export files</li>
-                </ul>
-              </article>
-
-              <article className="card">
-                <h3>Simple Web Apps</h3>
-                <p>Custom mini-tools such as booking forms, quote calculators, and internal dashboards.</p>
-                <ul>
-                  <li>Quote and estimate calculators</li>
-                  <li>Booking and enquiry workflows</li>
-                  <li>Light admin dashboards</li>
-                </ul>
-              </article>
+          <div className="note">
+            <div className="note-box">
+              <b>Add-ons:</b>
+              <span className="muted">Branding pack AUD $600-$1,500 · Extra pages AUD $250-$500 · Monthly care AUD $120-$450</span>
             </div>
           </div>
         </section>
 
-        <section className="section section-soft" id="packages">
-          <div className="container">
-            <div className="section-head">
-              <p className="eyebrow">Pricing</p>
-              <h2>Competitive Sydney pricing for solo-agency delivery</h2>
-              <p>Transparent ranges so you can plan budget before we scope in detail.</p>
-            </div>
+        <section id="work" className="section alt">
+          <div className="section-head">
+            <h2>Example work</h2>
+            <p>These are your original video showcases restored in the React build.</p>
+          </div>
 
-            <div className="cards three-col pricing-grid">
-              <article className="card package">
-                <p className="package-label">Starter</p>
-                <h3>Launch Website</h3>
-                <p className="price">AUD $1,500 - $2,500</p>
-                <ul>
-                  <li>1-3 page business website</li>
-                  <li>Contact form setup</li>
-                  <li>Basic SEO setup</li>
-                  <li>One revision round</li>
-                </ul>
-                <p className="meta">Typical timeline: 1-2 weeks</p>
-              </article>
+          <div className="gallery">
+            <figure className="shot">
+              <video className="media" src={workWebsite} autoPlay muted loop playsInline />
+              <figcaption>
+                <b>Modern Website</b>
+                <span className="muted tiny">Clean · fast · responsive</span>
+              </figcaption>
+            </figure>
 
-              <article className="card package featured">
-                <p className="package-label">Business</p>
-                <h3>Growth Website</h3>
-                <p className="price">AUD $3,000 - $5,500</p>
-                <ul>
-                  <li>5-8 page site architecture</li>
-                  <li>Lead funnel page structure</li>
-                  <li>Analytics and tracking setup</li>
-                  <li>Two revision rounds</li>
-                </ul>
-                <p className="meta">Typical timeline: 2-4 weeks</p>
-              </article>
+            <figure className="shot">
+              <video className="media" src={workLogo} autoPlay muted loop playsInline />
+              <figcaption>
+                <b>Logo and Branding</b>
+                <span className="muted tiny">Identity · motion · polish</span>
+              </figcaption>
+            </figure>
 
-              <article className="card package">
-                <p className="package-label">Pro</p>
-                <h3>Website + App Toolkit</h3>
-                <p className="price">AUD $6,000 - $10,000+</p>
-                <ul>
-                  <li>Custom website build</li>
-                  <li>One business web-app feature</li>
-                  <li>Branding pack included</li>
-                  <li>Three revision rounds</li>
-                </ul>
-                <p className="meta">Typical timeline: 4-8 weeks</p>
-              </article>
-            </div>
-
-            <div className="addons">
-              <p>
-                <strong>Common add-ons:</strong> branding-only package (AUD $600-$1,500), extra pages (AUD $250-$500 each),
-                and monthly care plans (AUD $120-$450/month).
-              </p>
-            </div>
+            <figure className="shot">
+              <video className="media" src={workApp} autoPlay muted loop playsInline />
+              <figcaption>
+                <b>Small App Tool</b>
+                <span className="muted tiny">Automation · efficiency</span>
+              </figcaption>
+            </figure>
           </div>
         </section>
 
-        <section className="section" id="process">
-          <div className="container">
-            <div className="section-head">
-              <p className="eyebrow">Process</p>
-              <h2>A clear process from brief to launch</h2>
-            </div>
-
-            <div className="cards three-col">
-              <article className="card process-card">
-                <p className="step">Step 1</p>
-                <h3>Strategy Call</h3>
-                <p>We define your goals, audience, and the exact pages or features needed.</p>
-              </article>
-
-              <article className="card process-card">
-                <p className="step">Step 2</p>
-                <h3>Design + Build</h3>
-                <p>I design the layout and build your site or tool with regular check-ins.</p>
-              </article>
-
-              <article className="card process-card">
-                <p className="step">Step 3</p>
-                <h3>Launch + Improve</h3>
-                <p>After launch, we refine based on real user behaviour and enquiries.</p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section className="section section-soft" id="contact">
-          <div className="container contact-wrap">
+        <section id="contact" className="section">
+          <div className="contact">
             <div>
-              <p className="eyebrow">Contact</p>
-              <h2>Tell me what you need and get a clear quote</h2>
+              <h2>Get a quote</h2>
               <p>
-                Share your business details and goals. I will reply with scope, timeline, and the best-fit package.
+                Tell me about your business and goals. I will reply with a clear scope, timeline, and recommended package.
               </p>
-              <ul className="contact-points">
-                <li>Response within 1 business day</li>
-                <li>No-pressure consultation</li>
-                <li>Practical options, no jargon</li>
-              </ul>
+
+              <div className="trust">
+                <div className="trust-item">✓ Clear pricing and scope</div>
+                <div className="trust-item">✓ Professional delivery</div>
+                <div className="trust-item">✓ Built custom for your workflow</div>
+              </div>
             </div>
 
-            <form className="contact-form" action="https://formspree.io/f/xkogprok" method="POST">
+            <form className="form" action="https://formspree.io/f/xkogprok" method="POST">
               <input type="hidden" name="_subject" value="New enquiry - Lumero Digital" />
-              <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" className="honeypot" />
+              <input type="text" name="_gotcha" style={{ display: 'none' }} />
 
-              <label htmlFor="name">Name</label>
-              <input id="name" name="name" type="text" required placeholder="Your name" />
+              <label>
+                Name
+                <input name="name" placeholder="Your name" required />
+              </label>
 
-              <label htmlFor="email">Email</label>
-              <input id="email" name="email" type="email" required placeholder="you@business.com" />
+              <label>
+                Email
+                <input name="email" type="email" placeholder="you@business.com" required />
+              </label>
 
-              <label htmlFor="service">Service needed</label>
-              <select id="service" name="service" required>
-                <option value="Website">Website</option>
-                <option value="Branding">Branding</option>
-                <option value="Web App">Web App</option>
-                <option value="Not Sure">Not sure yet</option>
-              </select>
+              <label>
+                What do you need?
+                <select name="service" required>
+                  <option value="Website">Website</option>
+                  <option value="Logo and Branding">Logo and Branding</option>
+                  <option value="Small App / Automation">Small App / Automation</option>
+                  <option value="Website + Branding">Website + Branding</option>
+                </select>
+              </label>
 
-              <label htmlFor="details">Project details</label>
-              <textarea
-                id="details"
-                name="details"
-                required
-                placeholder="What do you need, and your target launch date?"
-              />
+              <label>
+                Details
+                <textarea name="details" placeholder="Business name + pages/features/style" required />
+              </label>
 
-              <button className="btn" type="submit">Request Quote</button>
+              <button className="btn full" type="submit">Send enquiry</button>
+              <p className="tiny muted">Typical reply: within 24 hours.</p>
             </form>
           </div>
         </section>
-      </main>
 
-      <footer className="site-footer">
-        <div className="container footer-wrap">
-          <p>&copy; {year} Lumero Digital. All rights reserved.</p>
-          <p className="footer-note">Sydney, Australia</p>
-        </div>
-      </footer>
+        <footer className="footer">
+          <div className="footer-inner">
+            <p>© {year} Lumero Digital</p>
+            <p className="tiny muted">Sydney, Australia</p>
+          </div>
+        </footer>
+      </main>
     </>
   )
 }
