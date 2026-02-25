@@ -79,11 +79,16 @@ function App() {
   const legal = legalKey ? legalCopy[legalKey] : null
 
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll('.reveal'))
+    const els = Array.from(
+      document.querySelectorAll('.reveal, .reveal-x, .reveal-up, .reveal-down, .reveal-scale')
+    )
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('in')
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in')
+            io.unobserve(entry.target)
+          }
         })
       },
       { threshold: 0.14 }
@@ -99,6 +104,107 @@ function App() {
       document.body.style.overflow = ''
     }
   }, [legalKey])
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReduced) return
+
+    const parallaxEls = Array.from(document.querySelectorAll('[data-parallax]'))
+    const scrollEls = Array.from(document.querySelectorAll('[data-scroll]'))
+    let raf = 0
+
+    const update = () => {
+      const vh = window.innerHeight || 1
+
+      parallaxEls.forEach((el) => {
+        const speed = Number(el.getAttribute('data-parallax')) || 0.2
+        const rect = el.getBoundingClientRect()
+        const center = rect.top + rect.height / 2
+        const delta = (center - vh / 2) / vh
+        const y = -delta * speed * 120
+        el.style.setProperty('--parallax-y', `${y.toFixed(2)}px`)
+      })
+
+      scrollEls.forEach((el) => {
+        const rect = el.getBoundingClientRect()
+        const start = vh * 0.92
+        const end = vh * 0.25
+        const raw = (start - rect.top) / (start - end)
+        const progress = Math.min(1, Math.max(0, raw))
+        const ty = (1 - progress) * 22
+        const scale = 0.965 + progress * 0.035
+        const opacity = 0.45 + progress * 0.55
+        const blur = (1 - progress) * 2.6
+
+        el.style.setProperty('--scroll-ty', `${ty.toFixed(2)}px`)
+        el.style.setProperty('--scroll-scale', scale.toFixed(3))
+        el.style.setProperty('--scroll-opacity', opacity.toFixed(3))
+        el.style.setProperty('--scroll-blur', `${blur.toFixed(2)}px`)
+      })
+    }
+
+    const onScroll = () => {
+      if (raf) return
+      raf = window.requestAnimationFrame(() => {
+        update()
+        raf = 0
+      })
+    }
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (raf) window.cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReduced) return
+
+    const cards = Array.from(document.querySelectorAll('.tilt-card'))
+    if (!cards.length) return
+
+    const handlers = cards.map((card) => {
+      let raf = 0
+      const onMove = (event) => {
+        const rect = card.getBoundingClientRect()
+        const x = (event.clientX - rect.left) / rect.width
+        const y = (event.clientY - rect.top) / rect.height
+        const rotateY = (x - 0.5) * 12
+        const rotateX = (0.5 - y) * 10
+
+        if (raf) return
+        raf = window.requestAnimationFrame(() => {
+          card.style.setProperty('--tilt-ry', `${rotateY.toFixed(2)}deg`)
+          card.style.setProperty('--tilt-rx', `${rotateX.toFixed(2)}deg`)
+          card.classList.add('tilting')
+          raf = 0
+        })
+      }
+
+      const onLeave = () => {
+        card.style.setProperty('--tilt-ry', '0deg')
+        card.style.setProperty('--tilt-rx', '0deg')
+        card.classList.remove('tilting')
+      }
+
+      card.addEventListener('mousemove', onMove)
+      card.addEventListener('mouseleave', onLeave)
+
+      return { card, onMove, onLeave }
+    })
+
+    return () => {
+      handlers.forEach(({ card, onMove, onLeave }) => {
+        card.removeEventListener('mousemove', onMove)
+        card.removeEventListener('mouseleave', onLeave)
+      })
+    }
+  }, [])
 
   const closeMenu = () => setMenuOpen(false)
 
@@ -172,8 +278,8 @@ function App() {
           </div>
 
           <div className="hero-art">
-            <div className="glow" />
-            <div className="card3d" aria-label="Lumero demo card">
+            <div className="glow parallax" data-parallax="0.32" />
+            <div className="card3d parallax tilt-card" data-parallax="0.18" aria-label="Lumero demo card">
               <div className="card-top">
                 <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
                 <span className="tag">Lumero Digital</span>
@@ -194,14 +300,14 @@ function App() {
           </div>
         </section>
 
-        <section id="services" className="section reveal">
+        <section id="services" className="section reveal-x">
           <div className="section-head">
             <h2>What we build</h2>
             <p>Three focused services, delivered properly for small business growth.</p>
           </div>
 
-          <div className="grid3">
-            <article className="card reveal delay-1">
+          <div className="grid3 stagger">
+            <article className="card reveal-x">
               <div className="card-topline">
                 <span className="chip">Websites</span>
                 <span className="chip subtle">Custom coded</span>
@@ -215,7 +321,7 @@ function App() {
               </ul>
             </article>
 
-            <article className="card reveal delay-2">
+            <article className="card reveal-x">
               <div className="card-topline">
                 <span className="chip">Branding</span>
                 <span className="chip subtle">Logo systems</span>
@@ -229,7 +335,7 @@ function App() {
               </ul>
             </article>
 
-            <article className="card reveal delay-3">
+            <article className="card reveal-x">
               <div className="card-topline">
                 <span className="chip">Small Apps</span>
                 <span className="chip subtle">Automation</span>
@@ -245,14 +351,14 @@ function App() {
           </div>
         </section>
 
-        <section id="showroom" className="section alt reveal">
+        <section id="showroom" className="section alt reveal-up">
           <div className="section-head">
             <h2>Showroom</h2>
             <p>Preview the exact visual quality and interaction style used in client builds.</p>
           </div>
 
           <div className="showroom">
-            <div className="device reveal delay-1">
+            <div className="device reveal-up scroll-zoom" data-scroll="zoom">
               <div className="device-top">
                 <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
                 <span className="device-title">{copy.title}</span>
@@ -308,7 +414,7 @@ function App() {
               </div>
             </div>
 
-            <div className="show-info reveal delay-2">
+            <div className="show-info reveal-up scroll-zoom" data-scroll="zoom">
               <h3>{copy.heading}</h3>
               <p>{copy.description}</p>
 
@@ -332,14 +438,14 @@ function App() {
           </div>
         </section>
 
-        <section id="pricing" className="section reveal">
+        <section id="pricing" className="section reveal-scale">
           <div className="section-head">
             <h2>Pricing</h2>
             <p>Competitive Sydney pricing for a solo specialist delivering premium quality.</p>
           </div>
 
-          <div className="pricing">
-            <article className="price-card reveal delay-1">
+          <div className="pricing stagger">
+            <article className="price-card reveal-x">
               <div className="price-head">
                 <h3>Starter</h3>
                 <span className="price-chip">Most popular start</span>
@@ -354,7 +460,7 @@ function App() {
               <a className="btn full" href="#contact">Quote Starter</a>
             </article>
 
-            <article className="price-card featured reveal delay-2">
+            <article className="price-card featured reveal-x">
               <div className="price-head">
                 <h3>Business</h3>
                 <span className="price-chip glow">Growth package</span>
@@ -369,7 +475,7 @@ function App() {
               <a className="btn full" href="#contact">Quote Business</a>
             </article>
 
-            <article className="price-card reveal delay-3">
+            <article className="price-card reveal-x">
               <div className="price-head">
                 <h3>Pro</h3>
                 <span className="price-chip">Custom scope</span>
@@ -393,14 +499,13 @@ function App() {
           </div>
         </section>
 
-        <section id="work" className="section alt reveal">
+        <section id="work" className="section alt reveal-up">
           <div className="section-head">
             <h2>Example work</h2>
-            <p>These are your original video showcases restored in the React build.</p>
           </div>
 
-          <div className="gallery">
-            <figure className="shot reveal delay-1">
+          <div className="gallery stagger">
+            <figure className="shot reveal-x scroll-zoom" data-scroll="zoom">
               <video className="media" src={workWebsite} autoPlay muted loop playsInline />
               <figcaption>
                 <b>Modern Website</b>
@@ -408,7 +513,7 @@ function App() {
               </figcaption>
             </figure>
 
-            <figure className="shot reveal delay-2">
+            <figure className="shot reveal-x scroll-zoom" data-scroll="zoom">
               <video className="media" src={workLogo} autoPlay muted loop playsInline />
               <figcaption>
                 <b>Logo and Branding</b>
@@ -416,7 +521,7 @@ function App() {
               </figcaption>
             </figure>
 
-            <figure className="shot reveal delay-3">
+            <figure className="shot reveal-x scroll-zoom" data-scroll="zoom">
               <video className="media" src={workApp} autoPlay muted loop playsInline />
               <figcaption>
                 <b>Small App Tool</b>
@@ -426,9 +531,9 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="section reveal">
+        <section id="contact" className="section reveal-down">
           <div className="contact">
-            <div className="reveal delay-1">
+            <div className="reveal-down">
               <h2>Get a quote</h2>
               <p>
                 Tell me about your business and goals. I will reply with a clear scope, timeline, and recommended package.
@@ -441,7 +546,7 @@ function App() {
               </div>
             </div>
 
-            <form className="form reveal delay-2" action="https://formspree.io/f/xkogprok" method="POST">
+            <form className="form reveal-down" action="https://formspree.io/f/xkogprok" method="POST">
               <input type="hidden" name="_subject" value="New enquiry - Lumero Digital" />
               <input type="text" name="_gotcha" style={{ display: 'none' }} />
 
