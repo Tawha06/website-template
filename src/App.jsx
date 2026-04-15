@@ -1,9 +1,11 @@
-﻿import { useEffect, useMemo, useState } from 'react'
+﻿import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import logo from '../assets/logo.png'
 import workWebsite from '../assets/work-website.mp4'
 import workLogo from '../assets/work-logo.mp4'
 import workApp from '../assets/work-app.mp4'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Float, OrbitControls, RoundedBox } from '@react-three/drei'
 
 const year = new Date().getFullYear()
 
@@ -70,6 +72,30 @@ const legalCopy = {
       `Last updated: ${year}`,
     ],
   },
+}
+
+function HeroScene() {
+  const groupRef = useRef()
+
+  useFrame((state) => {
+    if (!groupRef.current) return
+    groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.28) * 0.12
+  })
+
+  return (
+    <>
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[3, 4, 2]} intensity={1.1} />
+      <Float floatIntensity={0.4} rotationIntensity={0.2} speed={0.9}>
+        <group ref={groupRef}>
+          <RoundedBox args={[2.5, 1.4, 0.18]} radius={0.16} smoothness={5}>
+            <meshStandardMaterial color="#0b172e" metalness={0.34} roughness={0.28} />
+          </RoundedBox>
+        </group>
+      </Float>
+      <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
+    </>
+  )
 }
 
 function App() {
@@ -256,7 +282,7 @@ function App() {
           <div className="hero-inner">
             <p className="pill">I build websites, logos, and apps for businesses</p>
 
-            <h1>
+            <h1 className="hero-title">
               Custom websites & apps
               <br/>
               Built to grow your business
@@ -279,6 +305,11 @@ function App() {
           </div>
 
           <div className="hero-art">
+            <div className="hero-canvas-wrap">
+              <Canvas camera={{ position: [0, 0, 5], fov: 42 }} dpr={[1, 2]}>
+                <HeroScene />
+              </Canvas>
+            </div>
             <div className="glow parallax" data-parallax="0.32" />
             <div className="card3d parallax tilt-card" data-parallax="0.18" aria-label="Lumero demo card">
               <div className="card-top">
@@ -443,7 +474,7 @@ function App() {
           </div>
 
           <div className="pricing stagger">
-            <article className="price-card reveal-x">
+            <article className="price-card reveal-x" style={{ '--i': 0 }}>
               <div className="price-head">
                 <h3>Starter</h3>
                 <span className="price-chip">Best for first site</span>
@@ -458,7 +489,7 @@ function App() {
               <a className="btn full" href="#contact">Get quote</a>
             </article>
 
-            <article className="price-card featured reveal-x">
+            <article className="price-card featured reveal-x" style={{ '--i': 1 }}>
               <div className="price-head">
                 <h3>Pro</h3>
                 <span className="price-chip glow">Popular choice</span>
@@ -473,7 +504,7 @@ function App() {
               <a className="btn full" href="#contact">Get quote</a>
             </article>
 
-            <article className="price-card reveal-x">
+            <article className="price-card reveal-x" style={{ '--i': 2 }}>
               <div className="price-head">
                 <h3>Custom</h3>
                 <span className="price-chip">Website + tools</span>
@@ -504,7 +535,7 @@ function App() {
           </div>
 
           <div className="gallery stagger">
-            <figure className="shot reveal-x scroll-zoom" data-scroll="zoom">
+            <figure className="shot reveal-x scroll-zoom" style={{ '--i': 0 }} data-scroll="zoom">
               <video className="media" src={workWebsite} autoPlay muted loop playsInline />
               <figcaption>
                 <b>Business Website</b>
@@ -512,7 +543,7 @@ function App() {
               </figcaption>
             </figure>
 
-            <figure className="shot reveal-x scroll-zoom" data-scroll="zoom">
+            <figure className="shot reveal-x scroll-zoom" style={{ '--i': 1 }} data-scroll="zoom">
               <video className="media" src={workLogo} autoPlay muted loop playsInline />
               <figcaption>
                 <b>Logo & Branding</b>
@@ -520,7 +551,7 @@ function App() {
               </figcaption>
             </figure>
 
-            <figure className="shot reveal-x scroll-zoom" data-scroll="zoom">
+            <figure className="shot reveal-x scroll-zoom" style={{ '--i': 2 }} data-scroll="zoom">
               <video className="media" src={workApp} autoPlay muted loop playsInline />
               <figcaption>
                 <b>Automation Tool</b>
