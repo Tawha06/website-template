@@ -10,61 +10,63 @@ const year = new Date().getFullYear()
 const demoCopy = {
   web: {
     title: 'Website Demo',
-    heading: 'Websites that feel premium',
-    description: 'Smooth motion, clear spacing, and conversion-first layout inspired by modern product brands.',
+    heading: 'Professional websites built fast',
+    description: 'Clean, responsive sites optimized for leads. No templates. Coded from scratch with your brand and messaging.',
     bullets: [
-      'Smooth scroll reveal and transitions',
-      'Brand-matched visual direction',
-      'Clear structure built for enquiries',
+      'Optimized for mobile and desktop',
+      'Designed to get enquiries',
+      'Built with your branding',
     ],
   },
   logo: {
     title: 'Logo Demo',
-    heading: 'Branding that looks credible everywhere',
-    description: 'Simple logo systems that look sharp on socials, uniforms, invoices, and signage.',
+    heading: 'Logos that work everywhere',
+    description: 'Simple, recognizable branding. Works on your website, social media, business cards, and signage.',
     bullets: [
-      'Icon and wordmark versions',
-      'Social and profile-ready exports',
-      'Consistent visual identity system',
+      'Main logo + variations',
+      'Color and font guidance',
+      'All file formats included',
     ],
   },
   app: {
     title: 'App Demo',
-    heading: 'Simple tools that save time',
-    description: 'Small web apps like calculators, booking flows, and internal dashboards tailored to your workflow.',
+    heading: 'Tools that save time',
+    description: 'Quote generators, booking flows, and dashboards built to fit your workflow. Automate the repetitive work.',
     bullets: [
-      'Quote and estimate automation',
-      'Simple dashboards and forms',
-      'Built around your real process',
+      'Quote generation tools',
+      'Simple dashboards',
+      'Tailored to your process',
     ],
   },
 }
 
 const legalCopy = {
   privacy: {
-    title: 'Privacy Policy (Summary)',
+    title: 'Privacy Policy',
     body: [
-      'We collect details you submit in the enquiry form, and may use basic analytics to improve performance.',
-      'Your information is used to respond to enquiries, prepare quotes, and deliver requested services.',
-      'We do not sell your data. Form submissions may be processed by Formspree as the contact provider.',
+      'I collect your name and email when you submit the contact form. This is used to respond to your enquiry.',
+      'I do not sell or share your information. It stays private.',
+      'I use basic website analytics (Google Analytics) to understand how people use this site. No personal data is tracked.',
+      'If you have questions, email me directly.',
       `Last updated: ${year}`,
     ],
   },
   terms: {
-    title: 'Terms of Service (Summary)',
+    title: 'Terms of Service',
     body: [
-      'All projects are delivered to the agreed scope, timeline, and payment terms confirmed in writing.',
-      'Clients provide accurate content, approvals, and feedback in time to avoid delays.',
-      'Nothing on this site is legal advice. Service rights are provided in line with Australian Consumer Law.',
+      'All projects include what I write and show you in the proposal. Scope changes are extra.',
+      'You pay a deposit to start. The balance is due when I deliver.',
+      'I deliver work that functions as described. If bugs happen, I fix them.',
+      'If a project stops, you own what\'s been delivered. Unused deposits are not refunded.',
       `Last updated: ${year}`,
     ],
   },
   refund: {
-    title: 'Refund Policy (Summary)',
+    title: 'Refund Policy',
     body: [
-      'Deposits are generally non-refundable after project work begins because time is allocated to your build.',
-      'If agreed scope is not delivered, we first remedy the issue. Where required, remedies follow Australian Consumer Law.',
-      'Your statutory guarantees under Australian Consumer Law and NSW Fair Trading guidance are not excluded.',
+      'Deposits are non-refundable once work starts. I hold time and resources for your project.',
+      'If I can\'t deliver what we agreed on, I either fix it or you don\'t pay.',
+      'If you cancel before work starts, you get your deposit back.',
       `Last updated: ${year}`,
     ],
   },
@@ -212,20 +214,20 @@ function App() {
     <>
       <header className="nav">
         <div className="nav-inner">
-          <a className="brand" href="#top" aria-label="Lumero Digital home" onClick={closeMenu}>
-            <img src={logo} alt="Lumero Digital" className="brand-logo" />
+          <a className="brand" href="#top" aria-label="Home" onClick={closeMenu}>
+            <img src={logo} alt="Logo" className="brand-logo" />
           </a>
 
           <nav className="links" aria-label="Primary">
             <a href="#services">Services</a>
-            <a href="#showroom">Showroom</a>
+            <a href="#showroom">Examples</a>
             <a href="#pricing">Pricing</a>
             <a href="#work">Work</a>
-            <a href="#contact" className="btn small">Get a quote</a>
+            <a href="#contact" className="btn small">Get quote</a>
           </nav>
 
           <button className="menu" type="button" onClick={() => setMenuOpen(true)} aria-label="Open menu">
-            Menu
+            ☰
           </button>
         </div>
       </header>
@@ -235,16 +237,16 @@ function App() {
           <div className="drawer-top">
             <div className="drawer-title">Menu</div>
             <button className="drawer-close" type="button" onClick={closeMenu} aria-label="Close menu">
-              X
+              ✕
             </button>
           </div>
           <a className="drawer-link" href="#services" onClick={closeMenu}>Services</a>
-          <a className="drawer-link" href="#showroom" onClick={closeMenu}>Showroom</a>
+          <a className="drawer-link" href="#showroom" onClick={closeMenu}>Examples</a>
           <a className="drawer-link" href="#pricing" onClick={closeMenu}>Pricing</a>
           <a className="drawer-link" href="#work" onClick={closeMenu}>Work</a>
           <div className="drawer-cta">
-            <a className="btn full" href="#contact" onClick={closeMenu}>Get a quote</a>
-            <p className="tiny muted drawer-note">Quick reply - clear scope - Sydney based</p>
+            <a className="btn full" href="#contact" onClick={closeMenu}>Get quote</a>
+            <p className="tiny muted drawer-note">I respond within 24 hours</p>
           </div>
         </div>
       </div>
@@ -252,28 +254,27 @@ function App() {
       <main id="top">
         <section className="hero reveal">
           <div className="hero-inner">
-            <p className="pill">Websites · Branding · Simple Apps for Sydney businesses</p>
+            <p className="pill">I build websites, logos, and apps for businesses</p>
 
             <h1>
-              Clear websites.<br />
-              Credible branding.<br />
-              Practical tools.
+              Custom websites & apps
+              <br/>
+              Built to grow your business
             </h1>
 
             <p className="sub">
-              Lumero Digital helps small businesses explain what they do fast, build trust instantly, and convert
-              more visitors into enquiries.
+              I code everything from scratch. No templates. Responsive sites that load fast, convert leads, and work on every device. Also logos and automation tools to run your business smoother.
             </p>
 
             <div className="cta">
               <a className="btn" href="#pricing">See pricing</a>
-              <a className="btn ghost" href="#showroom">See demos</a>
+              <a className="btn ghost" href="#showroom">See examples</a>
             </div>
 
             <div className="hero-badges">
-              <div className="badge-pill"><b>Fast delivery</b><small>Optimised and responsive</small></div>
-              <div className="badge-pill"><b>Simple UX</b><small>Easy to scan and navigate</small></div>
-              <div className="badge-pill"><b>Lead focused</b><small>Built to drive enquiries</small></div>
+              <div className="badge-pill"><b>Fast to build</b><small>Get live in weeks not months</small></div>
+              <div className="badge-pill"><b>Gets results</b><small>Designed for leads and conversions</small></div>
+              <div className="badge-pill"><b>Built custom</b><small>Your brand, your message</small></div>
             </div>
           </div>
 
@@ -302,50 +303,47 @@ function App() {
 
         <section id="services" className="section reveal-x">
           <div className="section-head">
-            <h2>What we build</h2>
-            <p>Three focused services, delivered properly for small business growth.</p>
+            <h2>What I build</h2>
+            <p>Three core services. Each starts from scratch, tailored to your needs.</p>
           </div>
 
           <div className="grid3 stagger">
             <article className="card reveal-x">
               <div className="card-topline">
                 <span className="chip">Websites</span>
-                <span className="chip subtle">Custom coded</span>
               </div>
-              <h3>Business websites</h3>
-              <p>Landing pages and multi-page sites designed to convert.</p>
+              <h3>Custom websites</h3>
+              <p>Fast, responsive, conversion-focused. Built with clean code, optimized for Google.</p>
               <ul>
-                <li>Mobile-first layout</li>
-                <li>Clear CTA and trust sections</li>
-                <li>SEO-ready page structure</li>
+                <li>Mobile-first design</li>
+                <li>Contact forms and tracking</li>
+                <li>Google Analytics setup</li>
               </ul>
             </article>
 
             <article className="card reveal-x">
               <div className="card-topline">
-                <span className="chip">Branding</span>
-                <span className="chip subtle">Logo systems</span>
+                <span className="chip">Logos</span>
               </div>
-              <h3>Logo and identity</h3>
-              <p>Simple branding that looks professional across every touchpoint.</p>
+              <h3>Logo & branding</h3>
+              <p>Clean, simple logos that work on your website, socials, and printed materials.</p>
               <ul>
-                <li>Primary and alternate logos</li>
-                <li>Color and font guidance</li>
-                <li>Social-ready exports</li>
+                <li>Main logo + variations</li>
+                <li>Color palette & fonts</li>
+                <li>All file formats</li>
               </ul>
             </article>
 
             <article className="card reveal-x">
               <div className="card-topline">
-                <span className="chip">Small Apps</span>
-                <span className="chip subtle">Automation</span>
+                <span className="chip">Apps</span>
               </div>
-              <h3>Business mini tools</h3>
-              <p>Quote calculators, booking flows, and lightweight dashboards.</p>
+              <h3>Tools & automation</h3>
+              <p>Quote generators, booking tools, dashboards. Whatever saves your team time.</p>
               <ul>
-                <li>Custom forms and workflows</li>
-                <li>Simple dashboard interfaces</li>
-                <li>Admin time-saving tools</li>
+                <li>Custom workflows</li>
+                <li>Quote/estimate tools</li>
+                <li>Fits your process</li>
               </ul>
             </article>
           </div>
@@ -353,8 +351,8 @@ function App() {
 
         <section id="showroom" className="section alt reveal-up">
           <div className="section-head">
-            <h2>Showroom</h2>
-            <p>Preview the exact visual quality and interaction style used in client builds.</p>
+            <h2>See examples</h2>
+            <p>What your finished site or app will look like. These are actual builds.</p>
           </div>
 
           <div className="showroom">
@@ -369,9 +367,9 @@ function App() {
 
                 <div className={`demo demo-web ${activeDemo === 'web' ? 'active' : ''}`}>
                   <div className="demo-hero">
-                    <div className="demo-pill">Landing - Responsive - Fast</div>
-                    <div className="demo-h1">Clean sections<br />with smooth reveals</div>
-                    <div className="demo-sub">Premium spacing, strong hierarchy, and a clear call-to-action path.</div>
+                    <div className="demo-pill">Responsive • Fast • Mobile-optimized</div>
+                    <div className="demo-h1">Clean sections, smooth reveals</div>
+                    <div className="demo-sub">Proper spacing and hierarchy. Designed to get leads and enquiries from your visitors.</div>
                   </div>
                   <div className="demo-cards">
                     <div className="demo-card">Services</div>
@@ -379,8 +377,8 @@ function App() {
                     <div className="demo-card">Contact</div>
                   </div>
                   <div className="demo-footerline">
-                    <span className="tiny muted">Scroll reveal and soft shadows</span>
-                    <span className="tiny muted">Built custom</span>
+                    <span className="tiny muted">Built custom • No templates</span>
+                    <span className="tiny muted">Works on all devices</span>
                   </div>
                   <div className="demo-sweep" />
                 </div>
@@ -389,11 +387,11 @@ function App() {
                   <div className="logo-wrap">
                     <div className="logo-glow" />
                     <img src={logo} alt="Logo demo" className="logo-big" />
-                    <div className="logo-caption">Logo reveal + clean spacing</div>
+                    <div className="logo-caption">Simple, memorable logos</div>
                     <div className="logo-chips">
-                      <span className="mini-chip">Icon</span>
-                      <span className="mini-chip">Wordmark</span>
-                      <span className="mini-chip">Social ready</span>
+                      <span className="mini-chip">Main logo</span>
+                      <span className="mini-chip">Variations</span>
+                      <span className="mini-chip">All formats</span>
                     </div>
                   </div>
                 </div>
@@ -408,7 +406,7 @@ function App() {
                     </div>
                     <div className="app-total"><span>Total</span><b>$2,480</b></div>
                     <button className="app-btn" type="button">Generate PDF / Doc</button>
-                    <p className="app-note">Auto-fills templates and saves admin time.</p>
+                    <p className="app-note">Saves admin time. Generates quotes in seconds.</p>
                   </div>
                 </div>
               </div>
@@ -418,10 +416,10 @@ function App() {
               <h3>{copy.heading}</h3>
               <p>{copy.description}</p>
 
-              <div className="demo-tabs" role="tablist" aria-label="Showroom demos">
+              <div className="demo-tabs" role="tablist" aria-label="Examples">
                 <button className={`tab ${activeDemo === 'web' ? 'active' : ''}`} onClick={() => setActiveDemo('web')} type="button">Websites</button>
                 <button className={`tab ${activeDemo === 'logo' ? 'active' : ''}`} onClick={() => setActiveDemo('logo')} type="button">Logos</button>
-                <button className={`tab ${activeDemo === 'app' ? 'active' : ''}`} onClick={() => setActiveDemo('app')} type="button">Small Apps</button>
+                <button className={`tab ${activeDemo === 'app' ? 'active' : ''}`} onClick={() => setActiveDemo('app')} type="button">Apps</button>
               </div>
 
               <div className="bullets">
@@ -432,7 +430,7 @@ function App() {
 
               <div className="show-cta">
                 <a className="btn full" href="#contact">Get a quote</a>
-                <p className="tiny muted">Share what you need and receive a clear scope with pricing options.</p>
+                <p className="tiny muted">Tell me what you need. I'll respond within 24 hours with a clear scope and price.</p>
               </div>
             </div>
           </div>
@@ -441,91 +439,92 @@ function App() {
         <section id="pricing" className="section reveal-scale">
           <div className="section-head">
             <h2>Pricing</h2>
-            <p>Competitive Sydney pricing for a solo specialist delivering premium quality.</p>
+            <p>Competitive rates for custom work. Sydney-based. All projects start with a clear scope and timeline.</p>
           </div>
 
           <div className="pricing stagger">
             <article className="price-card reveal-x">
               <div className="price-head">
                 <h3>Starter</h3>
-                <span className="price-chip">Most popular start</span>
+                <span className="price-chip">Best for first site</span>
               </div>
-              <p className="price">AUD $1,500 - $2,500</p>
-              <p className="desc">1-3 page website for new or early-stage businesses.</p>
+              <p className="price">$1,500 – $2,500</p>
+              <p className="desc">Simple website (1-3 pages). Perfect for getting online quickly.</p>
               <ul>
-                <li>Mobile responsive build</li>
-                <li>Contact form integration</li>
-                <li>Basic SEO structure</li>
+                <li>Mobile responsive</li>
+                <li>Contact form</li>
+                <li>Basic SEO setup</li>
               </ul>
-              <a className="btn full" href="#contact">Quote Starter</a>
+              <a className="btn full" href="#contact">Get quote</a>
             </article>
 
             <article className="price-card featured reveal-x">
               <div className="price-head">
-                <h3>Business</h3>
-                <span className="price-chip glow">Growth package</span>
+                <h3>Pro</h3>
+                <span className="price-chip glow">Popular choice</span>
               </div>
-              <p className="price">AUD $3,000 - $5,500</p>
-              <p className="desc">5-8 pages with stronger lead flow and tracking setup.</p>
+              <p className="price">$3,000 – $5,500</p>
+              <p className="desc">Full business site (5-8 pages) with email forms, tracking, and lead optimization.</p>
               <ul>
-                <li>Conversion-focused page structure</li>
-                <li>Service and trust pages</li>
-                <li>Analytics and event tracking</li>
+                <li>Lead capture pages</li>
+                <li>Analytics tracking</li>
+                <li>Conversion optimized</li>
               </ul>
-              <a className="btn full" href="#contact">Quote Business</a>
+              <a className="btn full" href="#contact">Get quote</a>
             </article>
 
             <article className="price-card reveal-x">
               <div className="price-head">
-                <h3>Pro</h3>
-                <span className="price-chip">Custom scope</span>
+                <h3>Custom</h3>
+                <span className="price-chip">Website + tools</span>
               </div>
-              <p className="price">AUD $6,000 - $10,000+</p>
-              <p className="desc">Website plus one custom app feature for operational efficiency.</p>
+              <p className="price">$6,000+</p>
+              <p className="desc">Website plus custom app features (quotes, booking, dashboard). Whatever you need.</p>
               <ul>
-                <li>Advanced page and feature set</li>
-                <li>Small app workflow integration</li>
-                <li>Priority support post-launch</li>
+                <li>Complex functionality</li>
+                <li>Custom integrations</li>
+                <li>Priority support</li>
               </ul>
-              <a className="btn full" href="#contact">Quote Pro</a>
+              <a className="btn full" href="#contact">Get quote</a>
             </article>
           </div>
 
           <div className="note reveal delay-3">
             <div className="note-box">
-              <b>Add-ons:</b>
-              <span className="muted">Branding pack AUD $600-$1,500 · Extra pages AUD $250-$500 · Monthly care AUD $120-$450</span>
+              <b>Plus:</b>
+              <span>Logo package $600-$1,500 • Extra pages $250-$500 • Monthly maintenance $120-$450</span>
             </div>
           </div>
         </section>
 
         <section id="work" className="section alt reveal-up">
           <div className="section-head">
-            <h2>Example work</h2>
+            <h2>Recent work</h2>
+            <p>Custom sites and apps built for real clients.</p>
           </div>
 
           <div className="gallery stagger">
             <figure className="shot reveal-x scroll-zoom" data-scroll="zoom">
               <video className="media" src={workWebsite} autoPlay muted loop playsInline />
               <figcaption>
-                <b>Modern Website</b>
-                <span className="muted tiny">Clean · fast · responsive</span>
+                <b>Business Website</b>
+                <span className="muted tiny">Responsive • Fast • Converts leads</span>
               </figcaption>
             </figure>
 
             <figure className="shot reveal-x scroll-zoom" data-scroll="zoom">
               <video className="media" src={workLogo} autoPlay muted loop playsInline />
               <figcaption>
-                <b>Logo and Branding</b>
-                <span className="muted tiny">Identity · motion · polish</span>
+                <b>Logo & Branding</b>
+                <span className="muted tiny">Clean • Memorable • Works everywhere</span>
               </figcaption>
             </figure>
 
             <figure className="shot reveal-x scroll-zoom" data-scroll="zoom">
               <video className="media" src={workApp} autoPlay muted loop playsInline />
               <figcaption>
-                <b>Small App Tool</b>
-                <span className="muted tiny">Automation · efficiency</span>
+                <b>Automation Tool</b>
+                <span className="muted tiny">Quote generator • Saves time</span>
               </figcaption>
             </figure>
           </div>
@@ -536,18 +535,18 @@ function App() {
             <div className="reveal-down">
               <h2>Get a quote</h2>
               <p>
-                Tell me about your business and goals. I will reply with a clear scope, timeline, and recommended package.
+                Tell me about your project. I'll send back a clear scope, timeline, and price within 24 hours. No meetings needed—just emails.
               </p>
 
               <div className="trust">
-                <div className="trust-item">✓ Clear pricing and scope</div>
-                <div className="trust-item">✓ Professional delivery</div>
-                <div className="trust-item">✓ Built custom for your workflow</div>
+                <div className="trust-item">✓ Clear pricing</div>
+                <div className="trust-item">✓ Written scope</div>
+                <div className="trust-item">✓ On-time delivery</div>
               </div>
             </div>
 
             <form className="form reveal-down" action="https://formspree.io/f/xkogprok" method="POST">
-              <input type="hidden" name="_subject" value="New enquiry - Lumero Digital" />
+              <input type="hidden" name="_subject" value="New project enquiry" />
               <input type="text" name="_gotcha" style={{ display: 'none' }} />
 
               <label>
@@ -565,31 +564,32 @@ function App() {
                 <select name="service" required>
                   <option value="Website">Website</option>
                   <option value="Logo and Branding">Logo and Branding</option>
-                  <option value="Small App / Automation">Small App / Automation</option>
-                  <option value="Website + Branding">Website + Branding</option>
+                  <option value="App or Tool">App or Tool</option>
+                  <option value="Website + Logo">Website + Logo</option>
+                  <option value="Other">Other</option>
                 </select>
               </label>
 
               <label>
-                Details
-                <textarea name="details" placeholder="Business name + pages/features/style" required />
+                Tell me about it
+                <textarea name="details" placeholder="Your business name, what you offer, what you need built" required />
               </label>
 
               <button className="btn full" type="submit">Send enquiry</button>
-              <p className="tiny muted">Typical reply: within 24 hours.</p>
+              <p className="tiny muted">I reply within 24 hours during business days.</p>
             </form>
           </div>
         </section>
 
         <footer className="footer reveal">
           <div className="footer-inner">
-            <p>© {year} Lumero Digital</p>
+            <p>Built by me. Custom work, always.</p>
             <div className="footer-links">
               <button className="legal-link" type="button" onClick={() => setLegalKey('privacy')}>Privacy</button>
               <button className="legal-link" type="button" onClick={() => setLegalKey('terms')}>Terms</button>
               <button className="legal-link" type="button" onClick={() => setLegalKey('refund')}>Refunds</button>
             </div>
-            <p className="tiny muted">Australian sole trader · Rights provided under Australian Consumer Law and NSW Fair Trading guidance.</p>
+            <p className="tiny muted">© {year}</p>
           </div>
         </footer>
       </main>
