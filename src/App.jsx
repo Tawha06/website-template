@@ -4,8 +4,6 @@ import logo from '../assets/logo.png'
 import workWebsite from '../assets/work-website.mp4'
 import workLogo from '../assets/work-logo.mp4'
 import workApp from '../assets/work-app.mp4'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Float, OrbitControls, RoundedBox } from '@react-three/drei'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -94,43 +92,6 @@ const legalCopy = {
   },
 }
 
-function HeroScene() {
-  const groupRef = useRef()
-  const orbRef = useRef()
-
-  useFrame((state) => {
-    if (!groupRef.current) return
-    const t = state.clock.elapsedTime
-    groupRef.current.rotation.y = Math.sin(t * 0.24) * 0.16
-    groupRef.current.rotation.x = Math.cos(t * 0.18) * 0.07
-    if (orbRef.current) {
-      orbRef.current.position.y = Math.sin(t * 0.54) * 0.12
-      orbRef.current.rotation.y = t * 0.16
-    }
-  })
-
-  return (
-    <>
-      <ambientLight intensity={0.42} />
-      <directionalLight position={[2.8, 3.4, 2.2]} intensity={1.35} color="#cfe9ff" />
-      <directionalLight position={[-2.5, -1.2, 1.6]} intensity={0.78} color="#6db7ff" />
-      <pointLight position={[0, 1.5, 2.2]} intensity={0.95} color="#8bd6ff" />
-      <Float floatIntensity={0.54} rotationIntensity={0.26} speed={0.82}>
-        <group ref={groupRef}>
-          <RoundedBox args={[2.6, 1.42, 0.24]} radius={0.18} smoothness={5}>
-            <meshStandardMaterial color="#101e34" metalness={0.56} roughness={0.2} emissive="#0a1d35" emissiveIntensity={0.34} />
-          </RoundedBox>
-          <mesh ref={orbRef} position={[0.7, 0.18, 0.45]}>
-            <icosahedronGeometry args={[0.34, 1]} />
-            <meshStandardMaterial color="#8ad5ff" metalness={0.3} roughness={0.22} emissive="#5ab7ff" emissiveIntensity={0.52} />
-          </mesh>
-        </group>
-      </Float>
-      <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
-    </>
-  )
-}
-
 function App() {
   const appRef = useRef(null)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -179,6 +140,37 @@ function App() {
 
     const mm = gsap.matchMedia()
     const ctx = gsap.context(() => {
+      const themeStops = [
+        { bg1: '#050d16', bg2: '#081321', halo: 'rgba(82, 170, 255, 0.10)' },
+        { bg1: '#081420', bg2: '#0b1828', halo: 'rgba(82, 170, 255, 0.12)' },
+        { bg1: '#0a1624', bg2: '#0e1b2c', halo: 'rgba(82, 170, 255, 0.13)' },
+        { bg1: '#0b1727', bg2: '#102034', halo: 'rgba(127, 216, 255, 0.12)' },
+        { bg1: '#0b1626', bg2: '#0f1e32', halo: 'rgba(142, 150, 255, 0.11)' },
+      ]
+
+      const applyTheme = (progress) => {
+        const position = progress * (themeStops.length - 1)
+        const index = Math.min(themeStops.length - 2, Math.max(0, Math.floor(position)))
+        const local = position - index
+        const current = themeStops[index]
+        const next = themeStops[index + 1]
+
+        const root = document.documentElement.style
+        root.setProperty('--page-bg-1', gsap.utils.interpolate(current.bg1, next.bg1, local))
+        root.setProperty('--page-bg-2', gsap.utils.interpolate(current.bg2, next.bg2, local))
+        root.setProperty('--page-halo', gsap.utils.interpolate(current.halo, next.halo, local))
+      }
+
+      applyTheme(0)
+
+      ScrollTrigger.create({
+        trigger: appRef.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+        onUpdate: (self) => applyTheme(self.progress),
+      })
+
       const heroIntro = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.1 } })
 
       heroIntro
@@ -187,46 +179,6 @@ function App() {
         .from('.hero-sub', { y: 22 }, '-=0.78')
         .from('.hero-cta-row .btn', { y: 24, stagger: 0.08 }, '-=0.8')
         .from('.hero-kpis .badge-pill', { y: 26, stagger: 0.08 }, '-=0.75')
-
-      gsap.to('.hero-orbit', {
-        y: -12,
-        x: 8,
-        duration: 5.6,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-      })
-
-      gsap.to('.hero-gridline', {
-        y: -18,
-        duration: 4.8,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-      })
-
-      gsap.to('.hero-layer-back', {
-        yPercent: -14,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.hero',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.1,
-        },
-      })
-
-      gsap.to('.hero-layer-front', {
-        yPercent: -8,
-        xPercent: 5,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.hero',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      })
 
       gsap.utils.toArray('.section-panel').forEach((section, index) => {
         const dir = index % 2 === 0 ? -10 : 10
@@ -284,7 +236,7 @@ function App() {
 
       mm.add('(min-width: 981px)', () => {
         gsap.to('.gallery .shot', {
-          yPercent: -6,
+          yPercent: -4,
           ease: 'none',
           stagger: 0.08,
           scrollTrigger: {
@@ -447,9 +399,9 @@ function App() {
             <p className="pill hero-kicker">Independent digital studio</p>
 
             <h1 className="hero-title">
-              <span className="hero-title-line">Websites built for clarity.</span>
+              <span className="hero-title-line" data-text="Websites built for clarity.">Websites built for clarity.</span>
               <br />
-              <span className="hero-title-line">Designed to convert.</span>
+              <span className="hero-title-line" data-text="Designed to convert.">Designed to convert.</span>
             </h1>
 
             <p className="sub hero-sub">
@@ -475,17 +427,6 @@ function App() {
                 <small>Custom direction and build</small>
               </div>
             </div>
-          </div>
-
-          <div className="hero-art hero-layer-back" data-depth="0.16">
-            <div className="hero-canvas-wrap">
-              <Canvas camera={{ position: [0, 0, 5], fov: 42 }} dpr={[1, 2]}>
-                <HeroScene />
-              </Canvas>
-            </div>
-            <div className="hero-orbit" aria-hidden="true" />
-            <div className="hero-gridline" aria-hidden="true" />
-            <div className="hero-reflection hero-layer-front" aria-hidden="true" data-depth="0.08" />
           </div>
         </section>
 
